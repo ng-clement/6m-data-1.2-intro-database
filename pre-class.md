@@ -1,64 +1,109 @@
-# **🎓 Pre-Study Guide: Data Modeling & Schema Design**
+# 📚 Pre-Class: Data Modeling & Schema Design
 
-**Topic:** Introduction to SQL Data Modeling **Estimated Time:** 30–45 Minutes **Prerequisites:** Basic understanding of Python variables and lists.
+**Estimated Time:** 30–45 minutes
+**Prerequisites:** Lesson 1.1 — The Data Landscape
 
-* **Watch:** [A Brief History of Databases](https://www.youtube.com/watch?v=WDTbDiQqPdA)  
-* **Think:** Why do we need a database instead of just using a giant Excel spreadsheet?  
-* **Setup:** Create a free account at [dbdiagram.io](https://dbdiagram.io/).
+> In Lesson 1.1 you learned what Data Analytics, Data Science, and AI are. This lesson goes one level deeper: before data can be analysed, it needs to be *stored* somewhere. This pre-class reading introduces how databases are structured and why the design decisions matter.
 
-## **👋 Welcome to Module 1.2**
+Complete the steps below **before your class session**. The in-class activities (building schemas for a Car Insurance company and an E-Commerce platform) build directly on these concepts.
 
-In our upcoming live session, we won't be spending much time looking at slides. Instead, we will be **building** database schemas for a Car Insurance company and an E-Commerce platform.
+---
 
-To maximize our time "doing" rather than "listening," please read through this guide and complete the quick setup task before class.
+## Step 1 — Watch the Video (10 min)
 
-## **📚 Part 1: The Core Concepts**
+▶️ [A Brief History of Databases and Their Applications](https://www.youtube.com/watch?v=WDTbDiQqPdA)
 
-*Read these 3 sections to understand the vocabulary we will use.*
+A concise overview of why databases were invented, how they evolved from flat files to relational systems, and where modern databases (NoSQL, Vector) fit in. Watching this first will give you the historical context for everything in Steps 2 and 3.
 
-### **1\. The Database Landscape**
+---
 
-Not all data is stored in rows and columns. We generally categorize databases into three types:
+## Step 2 — Read the Core Concepts (15 min)
 
-* **Relational (SQL):** Think of this like a **Bank Vault**. It is strict, organized, and safe. We use it for financial records, user accounts, and inventory. (Examples: PostgreSQL, MySQL).  
-* **NoSQL:** Think of this like a **Messy Desk**. It is flexible and fast. You can throw documents (JSON) on it without worrying about filing cabinets. We use it for social media feeds or sensor data. (Examples: MongoDB).  
-* **Vector:** Think of this like a **Brain**. It stores data by "meaning" rather than keywords. Used for AI and similarity searches (e.g., "Find me a song that sounds sad").
+### The Database Landscape
 
-### **2\. The Anatomy of a Table**
+Not all data is stored the same way. There are three main categories:
 
-In this lesson, we focus on **Relational (SQL)** databases. To link tables together, we use special IDs called **Keys**.
+- **Relational (SQL):** Think of a **Bank Vault** — strict, organised, and safe. Used for financial records, user accounts, and inventory. (Examples: PostgreSQL, MySQL)
+- **NoSQL:** Think of a **Messy Desk** — flexible and fast. You can store documents (JSON) without worrying about rigid structure. Used for social media feeds or sensor data. (Examples: MongoDB)
+- **Vector:** Think of a **Brain** — stores data by *meaning* rather than keywords. Used for AI and similarity searches (e.g., "Find me a song that sounds sad"). (Examples: Pinecone, Weaviate)
 
-* **Primary Key (PK):** The unique ID of a row. Think of it like your **Social Security Number** or **Passport Number**. Every table needs one. It distinguishes "John Smith (ID: 1)" from "John Smith (ID: 2)".  
-* **Foreign Key (FK):** A reference to someone else's ID. Think of this like your **Passport Number written on a Flight Manifest**. The flight manifest doesn't hold your actual passport; it just holds a *reference* (Key) that points back to you.
+### The Anatomy of a Table
 
-### **3\. Normalization (The Art of Tying Up)**
+In this lesson, we focus on **Relational (SQL)** databases. Tables are linked together using special IDs called **Keys**:
 
-Normalization is a fancy word for "organizing data to reduce redundancy." Imagine an Excel sheet where you write a customer's address every time they buy a coffee. If they move house, you have to update 500 rows.
+- **Primary Key (PK):** The unique ID of a row. Think of it like your **Passport Number** — every person in the system has one, and no two are the same. It distinguishes "John Smith (ID: 1)" from "John Smith (ID: 2)".
+- **Foreign Key (FK):** A reference to someone else's Primary Key. Think of it like your **Passport Number written on a Flight Manifest** — the manifest doesn't copy your whole passport, it just holds a reference that points back to you.
 
-* **Un-normalized:** Storing the address 500 times.  
-* **Normalized:** Storing the address *once* in a "Customers" table, and just referring to the `Customer_ID` in the "Orders" table.
+### Normalization — The Art of Tidying Up
 
-* **Check out this:[Interactive Visulazation: Database Normalization](https://su-ntu-ctp.github.io/6m-data-1.2-intro-database/)**
+Normalization means organising data to avoid redundancy. Imagine a spreadsheet where you write a customer's home address on every order row. If they move house, you'd have to update hundreds of rows.
 
-## **🛠️ Part 2: Tool Setup**
+- **Un-normalized:** Storing the address 500 times across 500 order rows.
+- **Normalized:** Storing the address *once* in a `Customers` table, and referring to a `customer_id` in the `Orders` table.
 
-We will be using a browser-based tool to draw our diagrams. Please ensure you have access.
+> **See it in action:** The [Database Normalization Interactive Visualization](https://su-ntu-ctp.github.io/6m-data-1.2-intro-database/) walks you through this step-by-step in your browser. Highly recommended.
 
-1. Go to [**dbdiagram.io**](https://dbdiagram.io/).  
-2. Click **"Go to App"** (No need to pay, the free version is sufficient).  
-3. Play around for 2 minutes: Try typing `Table users { id int }` on the left side and see what happens on the right.
+---
 
-## **🧠 Part 3: "Ticket to Class" Activity**
+## Step 3 — Tool Setup (5 min)
 
-*Complete this short thought experiment before the session.*
+We will use a browser-based tool to draw database diagrams in class. Set it up now so you're not doing it during the session.
 
-**The Receipt Challenge** Find a physical receipt (from a grocery store, cafe, or online order) or imagine one. Look at the data on it.
+1. Go to [**dbdiagram.io**](https://dbdiagram.io/)
+2. Click **"Go to App"** — the free version is all you need
+3. Try typing `Table users { id int }` on the left panel and watch the diagram appear on the right. That's DBML — the language you'll use in class.
 
-Identify which data belongs to the **"Transaction"** (happened once) and which data belongs to the **"Master Record"** (stays the same).
+---
 
-* **Date & Time:** (Transaction? or Master?)  
-* **Store Address:** (Transaction? or Master?)  
-* **Item Name (e.g., "Milk"):** (Transaction? or Master?)  
-* **Item Price:** (Does this belong to the Milk? Or the Transaction? *Hint: What happens if the price of milk changes next week?*)
+## Step 4 — Think About This
 
-**Bring your answers to the session\!** We will use this to break down the "E-Commerce Deconstruction" activity.
+Before the session, consider: **Why do we need a database at all? Why not just use a giant Excel spreadsheet?**
+
+Write down your thoughts, then check the suggested answer below.
+
+<details>
+<summary>Suggested answer</summary>
+
+Excel works well for small, human-curated datasets — but it breaks down quickly at scale and in multi-user environments. A few specific problems:
+
+- **Concurrency:** If two people edit the same Excel file at the same time, one person's changes get overwritten. Databases handle thousands of simultaneous writes safely.
+- **Scale:** Excel starts to struggle past ~1 million rows. Databases are designed to handle billions.
+- **Integrity:** Excel lets you type anything into any cell — no validation. Databases enforce rules: a `customer_id` column can only contain integers, an `email` column must be unique, etc.
+- **Relationships:** In Excel, linking two sheets together is manual and fragile. Databases have Foreign Keys that enforce relationships automatically.
+- **Querying:** Finding all customers who spent more than $500 last month in Excel requires complex formulas. In a database, it's one SQL line.
+
+</details>
+
+---
+
+## 🎯 Pre-Class Activity
+
+*Complete this short thought experiment before the session. It's the conceptual foundation for the E-Commerce Deconstruction activity in class.*
+
+**The Receipt Challenge**
+
+Find a physical receipt (grocery store, café, or online order) or imagine one. Look at the data on it and decide: does each piece of data belong to the **Transaction** (happened once, specific to this purchase) or the **Master Record** (stays the same regardless of how many times someone buys)?
+
+| Data Item | Transaction or Master Record? |
+|---|---|
+| Date & Time | |
+| Store Address | |
+| Item Name (e.g., "Milk") | |
+| Item Price | *(Tricky — what happens if the price of milk changes next week?)* |
+
+*If attending live: bring your answers to class — we'll use them to kick off the E-Commerce activity.*
+*If self-studying: work through it yourself first, then check the answer key below.*
+
+<details>
+<summary>Answer Key — The Receipt Challenge</summary>
+
+| Data Item | Category | Reasoning |
+|---|---|---|
+| Date & Time | **Transaction** | The date is specific to this purchase. Every order has a different date. |
+| Store Address | **Master Record** | The store's address doesn't change from transaction to transaction. It belongs in a `Stores` table, referenced by the order. |
+| Item Name ("Milk") | **Master Record** | "Milk" is a product that exists independently of any single purchase. It belongs in a `Products` table. |
+| Item Price | **Both — depending on context** | The *current* price of milk belongs in the `Products` table. But the *price you actually paid* on this specific date must be snapshotted into the Transaction row — because if the price changes next week, your old receipt should still show what you paid, not the new price. This is exactly the "History Problem" you'll solve in the in-class assignment. |
+
+**The key insight:** Some data lives on the receipt *because it was true at that moment*, even if the master record changes later. This is why transaction tables often store a `price_at_purchase` column alongside a `product_id`.
+
+</details>
